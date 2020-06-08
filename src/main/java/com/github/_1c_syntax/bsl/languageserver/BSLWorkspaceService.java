@@ -22,6 +22,8 @@
 package com.github._1c_syntax.bsl.languageserver;
 
 import com.github._1c_syntax.bsl.languageserver.configuration.LanguageServerConfiguration;
+import com.github._1c_syntax.bsl.languageserver.context.ServerContext;
+import com.github._1c_syntax.bsl.languageserver.providers.SymbolProvider;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
@@ -36,14 +38,16 @@ import java.util.concurrent.CompletableFuture;
 public class BSLWorkspaceService implements WorkspaceService {
 
   private final LanguageServerConfiguration configuration;
+  private final ServerContext context;
 
-  public BSLWorkspaceService(LanguageServerConfiguration configuration) {
+  public BSLWorkspaceService(LanguageServerConfiguration configuration, ServerContext context) {
     this.configuration = configuration;
+    this.context = context;
   }
 
   @Override
   public CompletableFuture<List<? extends SymbolInformation>> symbol(WorkspaceSymbolParams params) {
-    return null;
+    return CompletableFuture.supplyAsync(() -> SymbolProvider.getSymbols(context, params));
   }
 
   @Override

@@ -56,7 +56,7 @@ public class BSLLanguageServer implements LanguageServer, LanguageClientAware {
     this.configuration = configuration;
 
     context = new ServerContext();
-    workspaceService = new BSLWorkspaceService(configuration);
+    workspaceService = new BSLWorkspaceService(configuration, context);
     textDocumentService = new BSLTextDocumentService(configuration, context);
   }
 
@@ -79,6 +79,7 @@ public class BSLLanguageServer implements LanguageServer, LanguageClientAware {
     capabilities.setCodeActionProvider(Boolean.TRUE);
     capabilities.setCodeLensProvider(new CodeLensOptions());
     capabilities.setDocumentLinkProvider(new DocumentLinkOptions());
+    capabilities.setWorkspaceSymbolProvider(Boolean.TRUE);
 
     InitializeResult result = new InitializeResult(capabilities);
 
