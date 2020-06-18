@@ -16,7 +16,10 @@ plugins {
     id("me.qoomon.git-versioning") version "3.0.0"
     id("com.github.ben-manes.versions") version "0.28.0"
     id("com.github.johnrengelman.shadow") version "5.2.0"
+    id("org.springframework.boot") version "2.3.1.RELEASE"
 }
+
+apply(plugin = "io.spring.dependency-management")
 
 repositories {
     mavenCentral()
@@ -44,6 +47,9 @@ val jacksonVersion = "2.10.3"
 val junitVersion = "5.6.1"
 
 dependencies {
+
+    implementation("org.springframework.boot:spring-boot-starter")
+
     // https://mvnrepository.com/artifact/org.eclipse.lsp4j/org.eclipse.lsp4j
     implementation("org.eclipse.lsp4j", "org.eclipse.lsp4j", "0.9.0")
 
